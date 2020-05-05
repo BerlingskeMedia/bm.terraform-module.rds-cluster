@@ -25,6 +25,7 @@ module "endpoint" {
   var_name       = "rds_endpoint"
   parameter_type = "String"
   value          = module.rds_cluster_aurora_mysql.endpoint
+  attributes      = var.attributes
 }
 
 module "rds_pass" {
@@ -40,6 +41,7 @@ module "rds_pass" {
   generate_secret = true
   var_name        = "rds_password"
   labeled_path    = true
+  attributes      = var.attributes
 }
 
 
