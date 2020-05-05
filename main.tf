@@ -14,7 +14,7 @@ data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 module "endpoint" {
-  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=mx_tools"
+  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=production"
   //source = "../bm.terraform-module.secrets"
   enabled        = var.enabled
   namespace      = var.namespace
@@ -28,7 +28,7 @@ module "endpoint" {
 }
 
 module "rds_pass" {
-  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=mx_tools"
+  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=production"
   //source = "../bm.terraform-module.secrets"
   namespace       = var.namespace
   stage           = var.stage
