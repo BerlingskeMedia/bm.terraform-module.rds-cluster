@@ -14,7 +14,7 @@ data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 module "endpoint" {
-  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=production"
+  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=tags/0.1.1"
   //source = "../bm.terraform-module.secrets"
   enabled        = var.enabled
   namespace      = var.namespace
@@ -29,7 +29,7 @@ module "endpoint" {
 }
 
 module "rds_pass" {
-  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=production"
+  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=tags/0.1.1"
   //source = "../bm.terraform-module.secrets"
   namespace       = var.namespace
   stage           = var.stage
@@ -65,7 +65,6 @@ module "rds_cluster_aurora_mysql" {
   cluster_family = var.db_cluster_family
   cluster_size   = var.db_cluster_size
   admin_user     = var.db_root_user
-  //admin_password  = data.aws_kms_secrets.rds.plaintext["master_password"]
   admin_password  = module.rds_pass.value
   db_name         = var.dbname
   db_port         = var.rds_port
