@@ -37,7 +37,7 @@ module "rds_pass" {
   tags            = var.tags
   enabled         = var.enabled && var.master_password == ""
   parameter_type  = "SecureString"
-  kms_encrypt     = true
+  kms_encrypt     = var.enabled
   generate_secret = true
   var_name        = "rds_password"
   labeled_path    = true

@@ -1,4 +1,8 @@
 ---
+# 0.1.2
+## Bugfixes:
+    - KMS related resources won't be created if module is disabled
+
 # 0.1.1
 ## Main changes
     - use bm.terraform-module.secrets version 0.1.1
