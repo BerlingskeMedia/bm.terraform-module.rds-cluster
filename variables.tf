@@ -8,7 +8,8 @@ variable "name" {
   type = string
 }
 variable "master_password" {
-  type = string
+  type    = string
+  default = ""
 }
 variable "rds_port" {
   type = string
@@ -16,9 +17,7 @@ variable "rds_port" {
 variable "vpc_id" {
   type = string
 }
-variable "security_groups" {
-  type = list(string)
-}
+
 variable "subnets" {
   type = list(string)
 }
@@ -26,45 +25,64 @@ variable "subnets" {
 variable "tags" {
   type = map(string)
 }
+variable "attributes" {
+  type        = list(string)
+  description = "Additional attributes (_e.g._ \"1\")"
+  default     = []
+  #sane default
+}
+
+variable "delimiter" {
+  type        = string
+  default     = "-"
+  description = "Delimiter between `namespace`, `stage`, `name` and `attributes`"
+  #sane default
+}
 
 variable "enabled" {
   type        = bool
   description = "Set to false to prevent the module from creating any resources"
-  default     = true
+  default     = false
 }
 
-variable "engine" {
+variable "db_engine" {
   type        = string
-  description = "RDS Engine type"
   default     = "aurora-mysql"
+  description = "The name of the database engine to be used for this DB cluster. Valid values: `aurora`, `aurora-mysql`, `aurora-postgresql`"
 }
 
-variable "cluster_family" {
+variable "db_cluster_family" {
   type        = string
-  description = "RDS cluster family"
   default     = "aurora-mysql5.7"
+  description = "The family of the DB cluster parameter group"
 }
 
-variable "cluster_size" {
+variable "db_cluster_size" {
   type        = string
-  description = "Number of RDS instances in cluster"
+  description = "How many instances should run in cluster"
   default     = "1"
 }
 
-variable "db_name" {
+variable "db_instance_type" {
   type        = string
-  description = "RDS database name"
-  default     = "dbname"
+  description = "Instance type"
+  default     = "db.t3.small"
 }
 
-variable "master_user_name" {
+variable "db_root_user" {
   type        = string
-  description = "Name of master user"
+  description = "Root user name"
   default     = "admin"
 }
 
-variable "instance_type" {
+variable "allowed_sg" {
+  type        = list(string)
+  default     = []
+  description = "List of Security Group IDs which will be allowed to connect with RDS"
+}
+
+variable "dbname" {
   type        = string
-  description = "RDS instance type"
-  default     = "db.t3.small"
+  description = "Database name"
+  default     = "dbname"
 }
