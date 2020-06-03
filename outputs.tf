@@ -34,11 +34,19 @@ output "root_username" {
   value = var.db_root_user
 }
 
+output "root_password" {
+  value = module.rds_pass.value
+}
+
 output "password_ssm_arn" {
   value = module.rds_pass.ssm_arn
 }
 
-output "endpoind_ssm_arn" {
+output "password_ssm_name" {
+  value = module.rds_pass.ssm_name
+}
+
+output "endpoint_ssm_arn" {
   value = module.endpoint.ssm_arn
 }
 
