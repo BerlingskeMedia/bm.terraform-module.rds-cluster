@@ -45,22 +45,61 @@ variable "enabled" {
   default     = false
 }
 
+##### RDS Instance settings related
+
 variable "db_engine" {
   type        = string
-  default     = "aurora-mysql"
-  description = "The name of the database engine to be used for this DB cluster. Valid values: `aurora`, `aurora-mysql`, `aurora-postgresql`"
+  default     = "mysql"
+  description = "The name of the database engine to be used for this DB cluster. example: `mysql`, `postgres`"
 }
 
-variable "db_cluster_family" {
+variable "db_engine_version" {
   type        = string
-  default     = "aurora-mysql5.7"
-  description = "The family of the DB cluster parameter group"
+  default     = "5.7.28"
+  description = "Version of choosen database engine"
 }
 
-variable "db_cluster_size" {
+variable "db_parameter_group" {
   type        = string
-  description = "How many instances should run in cluster"
-  default     = "1"
+  description = "Database cluster parameter group name"
+}
+
+variable "db_parameter" {
+  type        = list(object({
+    apply_method = string
+    name         = string
+    value        = string
+  }))
+  default     = []
+  description = "Database cluster custom parameters list"
+}
+
+variable "db_option_group_name" {
+  type        = string
+  description = "Database cluster option group name"
+}
+
+variable "db_options" {
+  type        = list(object({
+    db_security_group_memberships  = list(string)
+    option_name                    = string
+    port                           = number
+    version                        = string
+    vpc_security_group_memberships = list(string)
+
+    option_settings = list(object({
+      name  = string
+      value = string
+    }))
+  }))
+  default     = []
+  description = "Database cluster custom options"
+}
+
+variable "db_multi_az_deploy" {
+  type        = bool
+  description = "Set if you want to have standby database in different AZ"
+  default     = false
 }
 
 variable "db_instance_type" {
@@ -74,6 +113,46 @@ variable "db_root_user" {
   description = "Root user name"
   default     = "admin"
 }
+
+variable "db_storage_type" {
+  type        = string
+  description = "How much storage database needs"
+  default     = "gp2"
+}
+
+variable "db_allocated_storage" {
+  type        = number
+  description = "How much storage database needs"
+  default     = 100
+}
+
+variable "db_storage_encrypted" {
+  type        = bool
+  description = "How much storage database needs"
+  default     = false
+}
+
+variable "db_maintenance_window" {
+  type        = string
+  description = "Define custom maintenance window. Must be fifferent than `db_backup_window`"
+}
+
+variable "db_backup_window" {
+  type        = string
+  description = "Define custom backup window. Must be fifferent than `db_maintenance_window`"
+}
+
+variable "db_backup_retention_period" {
+  type        = number
+  description = "Define backup retention in days. Must be > 0 to enable backups"
+}
+
+variable "db_restore_snapshot_id" {
+  type        = string
+  description = "Pass snapshot id if you want to create database from snapshot"
+}
+
+#######################
 
 variable "allowed_sg" {
   type        = list(string)
