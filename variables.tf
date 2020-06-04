@@ -59,6 +59,12 @@ variable "db_engine_version" {
   description = "Version of choosen database engine"
 }
 
+variable "db_port" {
+  type        = number
+  default     = 3306
+  description = "Database port number"
+}
+
 variable "db_parameter_group" {
   type        = string
   description = "Database cluster parameter group name"
