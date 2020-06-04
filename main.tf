@@ -76,6 +76,7 @@ module "rds_instance" {
     backup_retention_period     = var.db_backup_retention_period
     backup_window               = var.db_backup_window
     tags                        = var.tags
+    attributes                  = var.attributes
 
     db_parameter                = var.db_parameter
     db_options                  = var.db_options
