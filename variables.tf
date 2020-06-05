@@ -43,10 +43,6 @@ variable "enabled" {
 }
 
 ##### RDS Instance settings related
-variable "db_port" {
-  type = string
-}
-
 variable "db_allowed_sg" {
   type        = list(string)
   default     = []
