@@ -54,7 +54,7 @@ module "rds_instance" {
     security_group_ids          = var.db_allowed_sg
     database_name               = var.dbname
     database_user               = var.db_root_user
-    database_password           = var.master_password != "" ? var.master_password : module.rds_pass.value
+    database_password           = var.master_password == "" ? module.rds_pass.value : var.master_password
     database_port               = var.db_port
     multi_az                    = var.db_multi_az_deploy
     storage_type                = var.db_storage_type
