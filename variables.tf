@@ -11,9 +11,6 @@ variable "master_password" {
   type    = string
   default = ""
 }
-variable "rds_port" {
-  type = string
-}
 variable "vpc_id" {
   type = string
 }
@@ -46,6 +43,9 @@ variable "enabled" {
 }
 
 ##### RDS Instance settings related
+variable "db_port" {
+  type = string
+}
 
 variable "db_allowed_sg" {
   type        = list(string)
@@ -73,7 +73,7 @@ variable "db_port" {
 
 variable "db_parameter_group" {
   type        = string
-  description = "Database cluster parameter group name"
+  description = "Name of the DB parameter group to associate"
   default     = ""
 }
 
@@ -89,7 +89,7 @@ variable "db_parameter" {
 
 variable "db_option_group_name" {
   type        = string
-  description = "Database cluster option group name"
+  description = "Name of the DB option group to associate"
   default     = ""
 }
 

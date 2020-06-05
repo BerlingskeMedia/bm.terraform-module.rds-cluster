@@ -29,7 +29,7 @@ output "root_username" {
 }
 
 output "root_password" {
-  value = module.rds_pass.value
+  value = var.master_password != "" ? var.master_password : module.rds_pass.value
 }
 
 output "password_ssm_arn" {

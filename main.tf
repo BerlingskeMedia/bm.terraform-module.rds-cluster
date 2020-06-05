@@ -44,6 +44,23 @@ module "rds_pass" {
   attributes      = var.attributes
 }
 
+module "rds_master_pass" {
+  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=tags/0.1.2"
+  //source = "../bm.terraform-module.secrets"
+  namespace       = var.namespace
+  stage           = var.stage
+  name            = var.name
+  tags            = var.tags
+  enabled         = var.enabled && var.master_password != ""
+  parameter_type  = "SecureString"
+  kms_encrypt     = var.enabled
+  generate_secret = false
+  value           = var.master_password
+  var_name        = "rds_password"
+  labeled_path    = true
+  attributes      = var.attributes
+}
+
 module "rds_instance" {
     source                      = "git::https://github.com/cloudposse/terraform-aws-rds.git?ref=tags/0.19.0"
     enabled                     = var.enabled
@@ -53,7 +70,7 @@ module "rds_instance" {
     security_group_ids          = var.db_allowed_sg
     database_name               = var.dbname
     database_user               = var.db_root_user
-    database_password           = module.rds_pass.value
+    database_password           = var.master_password != "" ? var.master_password : module.rds_pass.value
     database_port               = var.db_port
     multi_az                    = var.db_multi_az_deploy
     storage_type                = var.db_storage_type
