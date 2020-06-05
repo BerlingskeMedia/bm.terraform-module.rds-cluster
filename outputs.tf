@@ -5,7 +5,7 @@ output "rds_endpoint" {
 
 output "rds_sg_id" {
   description = "Security Group ID allows to connect to RDS"
-  value       = join("", aws_security_group.rds_sg.*.id)
+  value       = module.rds_instance.security_group_id
 }
 
 output "ssm_arns" {
@@ -22,12 +22,6 @@ output "kms_arn" {
 
 output "kms_key_id" {
   value = module.rds_pass.kms_key_id
-}
-
-output "dbuser_arns" {
-  value = [for db_id in module.rds_cluster_aurora_mysql.dbi_resource_ids :
-    "arn:aws:rds-db:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:dbuser:${db_id}/${var.db_root_user}"
-  ]
 }
 
 output "root_username" {
