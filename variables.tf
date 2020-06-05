@@ -70,7 +70,7 @@ variable "db_port" {
 variable "db_parameter_group" {
   type        = string
   description = "Name of the DB parameter group to associate"
-  default     = ""
+  default     = "mysql5.7"
 }
 
 variable "db_parameter" {
