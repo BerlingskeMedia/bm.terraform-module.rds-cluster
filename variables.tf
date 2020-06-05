@@ -74,7 +74,7 @@ variable "db_port" {
 variable "db_parameter_group" {
   type        = string
   description = "Database cluster parameter group name"
-  default     = null
+  default     = ""
 }
 
 variable "db_parameter" {
@@ -90,7 +90,7 @@ variable "db_parameter" {
 variable "db_option_group_name" {
   type        = string
   description = "Database cluster option group name"
-  default     = null
+  default     = ""
 }
 
 variable "db_options" {
