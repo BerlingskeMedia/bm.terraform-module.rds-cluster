@@ -49,7 +49,7 @@ module "rds_instance" {
     namespace                   = var.namespace
     stage                       = var.stage
     name                        = var.name
-    security_group_ids          = var.allowed_sg
+    security_group_ids          = var.db_allowed_sg
     database_name               = var.dbname
     database_user               = var.db_root_user
     database_password           = module.rds_pass.value

@@ -47,6 +47,12 @@ variable "enabled" {
 
 ##### RDS Instance settings related
 
+variable "db_allowed_sg" {
+  type        = list(string)
+  default     = []
+  description = "List of Security Group IDs which will be allowed to connect with RDS"
+}
+
 variable "db_engine" {
   type        = string
   default     = "mysql"
@@ -68,6 +74,7 @@ variable "db_port" {
 variable "db_parameter_group" {
   type        = string
   description = "Database cluster parameter group name"
+  default     = null
 }
 
 variable "db_parameter" {
@@ -83,6 +90,7 @@ variable "db_parameter" {
 variable "db_option_group_name" {
   type        = string
   description = "Database cluster option group name"
+  default     = null
 }
 
 variable "db_options" {
@@ -141,30 +149,28 @@ variable "db_storage_encrypted" {
 variable "db_maintenance_window" {
   type        = string
   description = "Define custom maintenance window. Must be fifferent than `db_backup_window`"
+  default     = null
 }
 
 variable "db_backup_window" {
   type        = string
   description = "Define custom backup window. Must be fifferent than `db_maintenance_window`"
+  default     = null
 }
 
 variable "db_backup_retention_period" {
   type        = number
   description = "Define backup retention in days. Must be > 0 to enable backups"
+  default     = null
 }
 
 variable "db_restore_snapshot_id" {
   type        = string
   description = "Pass snapshot id if you want to create database from snapshot"
+  default     = null
 }
 
 #######################
-
-variable "allowed_sg" {
-  type        = list(string)
-  default     = []
-  description = "List of Security Group IDs which will be allowed to connect with RDS"
-}
 
 variable "dbname" {
   type        = string
