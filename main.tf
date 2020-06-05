@@ -25,7 +25,7 @@ module "endpoint" {
   var_name       = "rds_endpoint"
   parameter_type = "String"
   value          = module.rds_instance.instance_endpoint
-  attributes      = var.attributes
+  attributes     = var.attributes
 }
 
 module "rds_pass" {
@@ -35,27 +35,11 @@ module "rds_pass" {
   stage           = var.stage
   name            = var.name
   tags            = var.tags
-  enabled         = var.enabled && var.master_password == ""
+  enabled         = var.enabled
   parameter_type  = "SecureString"
   kms_encrypt     = var.enabled
-  generate_secret = true
-  var_name        = "rds_password"
-  labeled_path    = true
-  attributes      = var.attributes
-}
-
-module "rds_master_pass" {
-  source = "git@github.com:BerlingskeMedia/bm.terraform-module.secrets?ref=tags/0.1.2"
-  //source = "../bm.terraform-module.secrets"
-  namespace       = var.namespace
-  stage           = var.stage
-  name            = var.name
-  tags            = var.tags
-  enabled         = var.enabled && var.master_password != ""
-  parameter_type  = "SecureString"
-  kms_encrypt     = var.enabled
-  generate_secret = false
-  value           = var.master_password
+  generate_secret = var.master_password == "" ? true : false
+  value           = var.master_password == "" ? null : var.master_password
   var_name        = "rds_password"
   labeled_path    = true
   attributes      = var.attributes
