@@ -25,7 +25,7 @@ module "endpoint" {
   var_name       = "rds_endpoint"
   parameter_type = "String"
   value          = module.rds_cluster_aurora_mysql.endpoint
-  attributes      = var.attributes
+  attributes     = var.attributes
 }
 
 module "rds_pass" {
@@ -56,21 +56,21 @@ resource "aws_security_group" "rds_sg" {
 }
 
 module "rds_cluster_aurora_mysql" {
-  source         = "git::https://github.com/cloudposse/terraform-aws-rds-cluster.git?ref=tags/0.21.0"
-  namespace      = var.namespace
-  stage          = var.stage
-  name           = "${var.name}"
-  engine         = var.db_engine
-  engine_mode    = "provisioned"
-  cluster_family = var.db_cluster_family
-  cluster_size   = var.db_cluster_size
-  admin_user     = var.db_root_user
+  source          = "git::https://github.com/cloudposse/terraform-aws-rds-cluster.git?ref=tags/0.21.0"
+  namespace       = var.namespace
+  stage           = var.stage
+  name            = "${var.name}"
+  engine          = var.db_engine
+  engine_mode     = "provisioned"
+  cluster_family  = var.db_cluster_family
+  cluster_size    = var.db_cluster_size
+  admin_user      = var.db_root_user
   admin_password  = module.rds_pass.value
   db_name         = var.dbname
   db_port         = var.rds_port
   instance_type   = "db.t3.small"
   vpc_id          = var.vpc_id
-  security_groups = aws_security_group.rds_sg.*.id
+  security_groups = concat(var.allowed_sgs, aws_security_group.rds_sg.*.id)
   subnets         = var.subnets
   enabled         = var.enabled
   attributes      = var.attributes

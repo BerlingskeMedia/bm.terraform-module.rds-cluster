@@ -1,4 +1,12 @@
 ---
+# 0.2.0
+## Main changes
+    - accept list of security groups to allow connection
+
+# 0.1.3
+## Main changes
+    - use bm.terraform-module.secrets version 0.1.2
+
 # 0.1.2
 ## Bugfixes:
     - KMS related resources won't be created if module is disabled

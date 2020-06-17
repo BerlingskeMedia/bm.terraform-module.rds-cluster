@@ -86,3 +86,9 @@ variable "dbname" {
   description = "Database name"
   default     = "dbname"
 }
+
+variable "allowed_sgs" {
+  type        = list(string)
+  description = "List of SG ids to allow connection to RDS"
+  default     = []
+}
