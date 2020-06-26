@@ -142,6 +142,12 @@ variable "db_storage_encrypted" {
   default     = false
 }
 
+variable "skip_final_snapshot" {
+  type        = bool
+  description = "Set to true if you don't need final snapshot on DB destruction"
+  default     = false
+}
+
 variable "db_maintenance_window" {
   type        = string
   description = "Define custom maintenance window. Must be fifferent than `db_backup_window`"
