@@ -46,7 +46,7 @@ module "rds_pass" {
 }
 
 module "rds_instance" {
-    source                      = "git::https://github.com/cloudposse/terraform-aws-rds.git?ref=tags/0.19.0"
+    source                      = "git::https://github.com/cloudposse/terraform-aws-rds.git?ref=tags/0.20.0"
     enabled                     = var.enabled
     namespace                   = var.namespace
     stage                       = var.stage
