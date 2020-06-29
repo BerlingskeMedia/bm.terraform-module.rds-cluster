@@ -85,8 +85,8 @@ variable "db_parameter" {
 
 variable "db_option_group_name" {
   type        = string
-  description = "Name of the DB option group to associate"
-  default     = ""
+  description = "Name of the DB option group to associate - leave it empty if you want to create new option group"
+  default     = "default:mysql-5-7"
 }
 
 variable "db_options" {
