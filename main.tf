@@ -20,7 +20,7 @@ module "endpoint" {
   namespace      = var.namespace
   stage          = var.stage
   name           = var.name
-  tags           = var.tags
+  tags           = module.label.tags
   labeled_path   = true
   var_name       = "rds_endpoint"
   parameter_type = "String"
@@ -34,7 +34,7 @@ module "rds_pass" {
   namespace       = var.namespace
   stage           = var.stage
   name            = var.name
-  tags            = var.tags
+  tags            = module.label.tags
   enabled         = var.enabled
   parameter_type  = "SecureString"
   kms_encrypt     = var.enabled
@@ -77,7 +77,7 @@ module "rds_instance" {
     copy_tags_to_snapshot       = true
     backup_retention_period     = var.db_backup_retention_period
     backup_window               = var.db_backup_window
-    tags                        = var.tags
+    tags                        = module.label.tags
     attributes                  = var.attributes
 
     db_parameter                = var.db_parameter
