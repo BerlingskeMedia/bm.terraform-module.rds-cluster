@@ -1,4 +1,8 @@
 ---
+# 0.2.1
+## Main changes
+    - Add depricated status to this repository
+
 # 0.2.0
 ## Main changes
     - accept list of security groups to allow connection
